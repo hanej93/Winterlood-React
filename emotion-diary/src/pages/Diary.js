@@ -15,6 +15,11 @@ const Diary = () => {
   const [data, setDate] = useState();
 
   useEffect(() => {
+    const titleElement = document.getElementsByTagName("title")[0];
+    titleElement.innerText = `감정 일기장 - ${id}번 일기`;
+  }, []);
+
+  useEffect(() => {
     if (diaryList.length >= 1) {
       const targetDiary = diaryList.find(
         (it) => parseInt(it.id) === parseInt(id),
@@ -37,7 +42,6 @@ const Diary = () => {
     const curEmotionData = emotionList.find(
       (it) => parseInt(it.emotion_id) === parseInt(data.emotion),
     );
-    console.log(curEmotionData);
 
     return (
       <div className="DiaryPage">
