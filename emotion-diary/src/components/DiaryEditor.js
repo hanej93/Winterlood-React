@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useCallback, useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -17,9 +17,9 @@ const DiaryEditor = ({ isEdit, originDate }) => {
   const [date, setDate] = useState(getStringDate(new Date()));
 
   const { onCreate, onEdit, onRemove } = useContext(DiaryDispatchContext);
-  const handleClickEmote = (emotion) => {
+  const handleClickEmote = useCallback((emotion) => {
     setEmotion(emotion);
-  };
+  }, []);
   const navigate = useNavigate();
 
   const handleSubmit = () => {
@@ -43,7 +43,7 @@ const DiaryEditor = ({ isEdit, originDate }) => {
   };
 
   const handleRemove = () => {
-    if (window.confirm("정말 샂게하시겠습니까?")) {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
       onRemove(originDate.id);
       navigate("/", { replace: true });
     }
